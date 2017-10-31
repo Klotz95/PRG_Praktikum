@@ -5,7 +5,8 @@ CONFIG -= qt
 
 SOURCES += \
     helloworld.cpp \
-    intarray.cpp
+    intarray.cpp \
+    main.cpp
 
 HEADERS += \
     intarray.h
