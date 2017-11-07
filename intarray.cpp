@@ -13,9 +13,9 @@ double IntArray::getLength( void ) {
 }
 
 void IntArray::arrayToStringMatrix(){
-    for(int i = 0; i <= (30*30); i++) {
+    for(int i = 0; i <= (30*30-1); i++) {
         cout << this->array[i] << " ";
-        if((i%30)==0) {
+        if(((i+1)%30)==0 and i > 0) {
             cout << endl;
         }
     }
