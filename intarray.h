@@ -10,6 +10,7 @@ public:
     double getLength( void );
     void arrayToStringMatrix();
     int getIndexValue(int val);
+    void setValueAtIndex(int index, int value);
 private:
     int length;
     int* array;

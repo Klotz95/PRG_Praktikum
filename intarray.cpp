@@ -13,11 +13,19 @@ double IntArray::getLength( void ) {
 }
 
 void IntArray::arrayToStringMatrix(){
-    for(int i = 0; i <= (30*30)-1; i++) {
-        cout << array[i] << " ";
+    for(int i = 0; i <= (30*30); i++) {
+        cout << this->array[i] << " ";
+        if((i%30)==0 && i!=0) {
+            cout << endl;
+        }
     }
+    cout << endl;
 }
 
 int IntArray::getIndexValue(int val) {
     return array[val];
+}
+
+void IntArray::setValueAtIndex(int index, int value){
+    array[index] = value;
 }

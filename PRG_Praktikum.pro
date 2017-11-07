@@ -6,7 +6,9 @@ CONFIG -= qt
 SOURCES += \
     helloworld.cpp \
     intarray.cpp \
-    main.cpp
+    main.cpp \
+    cabase.cpp
 
 HEADERS += \
-    intarray.h
+    intarray.h \
+    cabase.h
