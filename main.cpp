@@ -41,6 +41,11 @@ int main()
         cout << "2. Reprint" << endl;
         cin >> input;
 
+        if(cin.fail()) {
+            cout << "cin is not a number!" << endl;
+            break;
+        }
+
         switch (input) {
         case 1:
             int cellindex, cellvalue;
