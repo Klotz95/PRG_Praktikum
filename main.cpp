@@ -2,6 +2,7 @@
 #include <iostream>
 
 using namespace std;
+class IntArray;
 
 void ClearScreen(){
     int n;
@@ -18,8 +19,8 @@ int main()
 
     // fill A1 with random values between 0 and 10
     for(int i = 0; i <= 29; i++) {
-        for(int j = 0; j <= 30; j++) {
-            A1[i][j] = rand() % 9 +1;
+        for(int j = 0; j < 30; j++) {
+            A1[i][j] = rand() % 10;
             //cout << "A1[" << i << "][" << j << "]: ";
             //cout << A1[i][j]<< endl;
         }
@@ -32,36 +33,42 @@ int main()
 
     A2->arrayToStringMatrix();
 
-
+    cout << "Welcome to console menu" << endl;
+    cout << "Enter the following numbers to run the respective commands." <<endl;
     // menu with different options
-    do{
-        int input;
+
+    string input;
+    int commandNr;
+     do{
+
         cout << "0. Exit" << endl;
         cout << "1. Change cell" << endl;
         cout << "2. Reprint" << endl;
+        cout << "$ ";
+
         cin >> input;
+        commandNr = std::stoi(input);
 
-        if(cin.fail()) {
-            cout << "cin is not a number!" << endl;
-            break;
-        }
-
-        switch (input) {
+        switch (commandNr) {
         case 1:
-            int cellindex, cellvalue;
-            cout << "Which index has the cell? ";
-            cin >> cellindex;
+            int x, y, cellvalue;
+            cout << "Please enter the x co-ordinate of the cell";
+            cin >> x;
+            cout << "Please enter the y co-ordinate of the cell";
+            cin >> y;
             cout << "Which value should be in the cell? ";
             cin >> cellvalue;
-            A2->setValueAtIndex(cellindex, cellvalue);
+            A2->setValueAtIndex(x, y, cellvalue);
             ClearScreen();
             A2->arrayToStringMatrix();
         case 2:
             ClearScreen();
             A2->arrayToStringMatrix();
             break;
-        default:
+        case 0:
             return 0;
+        default:
+             cout << "Invalid input. The only allowed inputs are 0, 1 or 2." << endl;
         }
 
     }while(1);

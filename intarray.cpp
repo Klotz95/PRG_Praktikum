@@ -2,6 +2,8 @@
 #include <iostream>
 using namespace std;
 
+
+
 IntArray::IntArray(int len)
 {
     this->length = len;
@@ -26,6 +28,7 @@ int IntArray::getIndexValue(int val) {
     return array[val];
 }
 
-void IntArray::setValueAtIndex(int index, int value){
-    array[index] = value;
+void IntArray::setValueAtIndex(int x, int y, int value){
+    int index = y*30+x;
+    this->array[index] = value;
 }
