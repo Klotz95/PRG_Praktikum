@@ -32,3 +32,8 @@ void IntArray::setValueAtIndex(int x, int y, int value){
     int index = y*30+x;
     this->array[index] = value;
 }
+
+void IntArray::setValueAtIndex(int x, int value){
+    int index = x;
+    this->array[index] = value;
+}
