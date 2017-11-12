@@ -29,7 +29,7 @@ int IntArray::getIndexValue(int val) {
 }
 
 void IntArray::setValueAtIndex(int x, int y, int value){
-    int index = y*30+x;
+    int index = y*30 + x;
     this->array[index] = value;
 }
 
