@@ -2,8 +2,6 @@
 #include <iostream>
 using namespace std;
 
-
-
 IntArray::IntArray(int len)
 {
     this->length = len;
@@ -24,16 +22,20 @@ void IntArray::arrayToStringMatrix(){
     cout << endl;
 }
 
-int IntArray::getIndexValue(int val) {
-    return array[val];
+int IntArray::getIndexValue(int index) {
+    return array[index];
+}
+
+int IntArray::getIndexValue(int x, int y) {
+    int index = y*30+x;
+    return getIndexValue(index);
 }
 
 void IntArray::setValueAtIndex(int x, int y, int value){
     int index = y*30+x;
-    this->array[index] = value;
+    setValueAtIndex(index,value);
 }
 
-void IntArray::setValueAtIndex(int x, int value){
-    int index = x;
+void IntArray::setValueAtIndex(int index, int value){
     this->array[index] = value;
 }

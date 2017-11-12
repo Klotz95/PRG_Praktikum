@@ -1,5 +1,6 @@
 #include <intarray.h>
 #include <iostream>
+#include <cabase.h>
 
 using namespace std;
 class IntArray;
@@ -21,8 +22,6 @@ int main()
     for(int i = 0; i <= 29; i++) {
         for(int j = 0; j < 30; j++) {
             A1[i][j] = rand() % 10;
-            //cout << "A1[" << i << "][" << j << "]: ";
-            //cout << A1[i][j]<< endl;
         }
     }
 
@@ -37,6 +36,7 @@ int main()
     cout << "Enter the following numbers to run the respective commands." <<endl;
     // menu with different options
 
+    bool exi = false;
     string input;
     int commandNr;
      do{
@@ -48,6 +48,8 @@ int main()
 
         cin >> input;
         commandNr = std::stoi(input);
+
+
 
         switch (commandNr) {
         case 1:
@@ -66,12 +68,31 @@ int main()
             A2->arrayToStringMatrix();
             break;
         case 0:
-            return 0;
+            exi = true;
+            break;
         default:
              cout << "Invalid input. The only allowed inputs are 0, 1 or 2." << endl;
         }
 
-    }while(1);
+    }while(!exi);
+
+    ClearScreen();
+    //exercise 2
+
+    cout << "#################################################################" << endl;
+    cout << "#                          exercise 2                           #" << endl;
+    cout << "#################################################################" << endl;
+
+    CAbase* cabase = new CAbase(30, 30);
+
+    cabase->evolve();
+    cabase->printUniverse();
+    cabase->generationCycle();
+    cabase->printUniverse();
+
+
+
+
 
     return 0;
 }
