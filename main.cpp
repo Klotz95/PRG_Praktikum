@@ -90,12 +90,67 @@ int main()
 
     CAbase* cabase = new CAbase(30, 30);
 
+
     cabase->evolve();
     cabase->printUniverse();
-    cabase->generationCycle();
-    cabase->printUniverse();
 
 
+    exi = false;
+    cinfailed = true;
+    do{
+
+       cout << "0. Exit" << endl;
+       cout << "1. Evolve" << endl;
+       cout << "2. Set alive cell" << endl;
+       cout << "3. Reprint" << endl;
+       cout << "4. Resize" << endl;
+       cout << "$ ";
+
+       cin >> input;
+       if (cin.fail() && cinfailed) {
+           cout << "Invalid input. The only allowed inputs are 0, 1 or 2." << endl;
+           cinfailed = !cinfailed;
+           continue;
+       }
+
+       int x, y, cellvalue;
+       switch (input) {
+       case 1:
+           cabase->evolve();
+           ClearScreen();
+           cabase->printUniverse();
+           break;
+       case 2:
+
+           cout << "Please enter the x co-ordinate of the cell: ";
+           cin >> x;
+           cout << "Please enter the y co-ordinate of the cell: ";
+           cin >> y;
+           cin >> cellvalue;
+           cabase->setActualStateOfCell(x, y, 1);
+           ClearScreen();
+           cabase->printUniverse();
+       case 3:
+           ClearScreen();
+           cabase->printUniverse();
+           break;
+       case 0:
+           exi = true;
+           break;
+       case 4:
+           cout << "Enter your universe width:";
+           cin >> x;
+           cout << "Enter your universe height:";
+           cin >> y;
+           cabase->setNx(x);
+           cabase->setNy(y);
+           cabase->printUniverse();
+           break;
+       default:
+            cout << "Invalid input. The only allowed inputs are 0, 1, 2, 3 or 4." << endl;
+       }
+
+   }while(!exi);
 
 
 
