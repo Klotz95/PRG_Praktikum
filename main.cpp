@@ -36,9 +36,11 @@ int main()
     cout << "Enter the following numbers to run the respective commands." <<endl;
     // menu with different options
 
+
     bool exi = false;
-    string input;
-    int commandNr;
+    int input;
+    bool cinfailed = true;
+
      do{
 
         cout << "0. Exit" << endl;
@@ -47,16 +49,19 @@ int main()
         cout << "$ ";
 
         cin >> input;
-        commandNr = std::stoi(input);
+        if (cin.fail() && cinfailed) {
+            cout << "Invalid input. The only allowed inputs are 0, 1 or 2." << endl;
+            cinfailed = !cinfailed;
+            continue;
+        }
 
 
-
-        switch (commandNr) {
+        switch (input) {
         case 1:
             int x, y, cellvalue;
-            cout << "Please enter the x co-ordinate of the cell";
+            cout << "Please enter the x co-ordinate of the cell: ";
             cin >> x;
-            cout << "Please enter the y co-ordinate of the cell";
+            cout << "Please enter the y co-ordinate of the cell: ";
             cin >> y;
             cout << "Which value should be in the cell? ";
             cin >> cellvalue;
