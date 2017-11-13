@@ -2,8 +2,12 @@
 #include "qpainter.h"
 
 GameWidget::GameWidget(QWidget* parent) {
+    this->cabase = new CAbase(50, 50);
 }
 
+CAbase GameWidget::getCAbase() {
+    return *cabase;
+}
 
 //void GameWidget::setTimerIntervall (timer->setInterval(int))() {
 
@@ -36,6 +40,19 @@ void GameWidget::paintUniverse() {
 
 }
 
+void GameWidget::setRectHeight(int rectHeight){
+    this->rectHeight = rectHeight;
+}
+void GameWidget::setRectWidth(int rectWidth){
+    this->rectWidth = rectWidth;
+}
+
+void GameWidget::resizeEvent(QResizeEvent *event) {
+    int widgetWidth = width();
+    int widgetHeight = height();
+
+}
+
 void GameWidget::paintEvent(QPaintEvent *event) {
 
 
@@ -44,9 +61,9 @@ void GameWidget::paintEvent(QPaintEvent *event) {
     painter.setRenderHint(QPainter::Antialiasing);
     QRect* rect;
 
-    for(int i = 0; i < 20; i++) {
-        for(int j = 0; j < 20; j++) {
-        rect = new QRect(i*20,j*20,20,20);
+    for(int i = 0; i < cabase->getNy(); i++) {
+        for(int j = 0; j < cabase->getNx(); j++) {
+        rect = new QRect(i*cabase->getNx(),j*cabase->getNy(), rectWidth, rectHeight);
         if(i!= 10) {
             painter.fillRect(*rect, QBrush(Qt::red));
         }
