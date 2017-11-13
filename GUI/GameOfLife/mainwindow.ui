@@ -30,10 +30,10 @@
        <enum>QLayout::SetFixedSize</enum>
       </property>
       <item row="6" column="0" colspan="3">
-       <widget class="QComboBox" name="comboBox_3"/>
+       <widget class="QComboBox" name="btnCellMode"/>
       </item>
       <item row="0" column="1">
-       <widget class="QPushButton" name="pushButton_2">
+       <widget class="QPushButton" name="btnStop">
         <property name="text">
          <string>Stop</string>
         </property>
@@ -42,14 +42,14 @@
       <item row="9" column="0" colspan="3">
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
-         <widget class="QPushButton" name="pushButton_4">
+         <widget class="QPushButton" name="btnLoad">
           <property name="text">
            <string>Load</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_5">
+         <widget class="QPushButton" name="btnSave">
           <property name="text">
            <string>Save</string>
           </property>
@@ -72,24 +72,24 @@
        </widget>
       </item>
       <item row="0" column="2">
-       <widget class="QPushButton" name="pushButton_3">
+       <widget class="QPushButton" name="btnClear">
         <property name="text">
          <string>Clear</string>
         </property>
        </widget>
       </item>
       <item row="2" column="0" colspan="3">
-       <widget class="QComboBox" name="comboBox"/>
+       <widget class="QComboBox" name="comboUniverseSize"/>
       </item>
       <item row="11" column="0" colspan="3">
-       <widget class="QPushButton" name="pushButton_7">
+       <widget class="QPushButton" name="btnRandomColor">
         <property name="text">
          <string>Random Color</string>
         </property>
        </widget>
       </item>
       <item row="12" column="0" colspan="3">
-       <widget class="QPushButton" name="pushButton_8">
+       <widget class="QPushButton" name="btnGo">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -102,23 +102,23 @@
        </widget>
       </item>
       <item row="0" column="0">
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QPushButton" name="btnStart">
         <property name="text">
          <string>Start</string>
         </property>
        </widget>
       </item>
       <item row="8" column="0" colspan="3">
-       <widget class="QSpinBox" name="spinBox">
+       <widget class="QSpinBox" name="spinMS">
         <property name="suffix">
          <string> ms</string>
         </property>
        </widget>
       </item>
       <item row="10" column="0" colspan="3">
-       <widget class="QPushButton" name="pushButton_6">
+       <widget class="QPushButton" name="btnSelectColor">
         <property name="text">
-         <string>Select coloer for cells</string>
+         <string>Select color for cells</string>
         </property>
        </widget>
       </item>
@@ -137,9 +137,9 @@
        </widget>
       </item>
       <item row="4" column="0" colspan="3">
-       <widget class="QComboBox" name="comboBox_2"/>
+       <widget class="QComboBox" name="btnUniverseMode"/>
       </item>
-      <item row="13" column="0">
+      <item row="13" column="0" colspan="3">
        <spacer name="verticalSpacer">
         <property name="orientation">
          <enum>Qt::Vertical</enum>
