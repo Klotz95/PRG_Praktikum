@@ -17,6 +17,9 @@ public:
     ~MainWindow();
     GameWidget* spielobjekt;
 
+private slots:
+
+
 private:
     Ui::MainWindow *ui;
 };

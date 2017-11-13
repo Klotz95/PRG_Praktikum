@@ -38,9 +38,10 @@ void GameWidget::paintUniverse() {
 
 void GameWidget::paintEvent(QPaintEvent *event) {
 
+
+
     QPainter painter(this);
-    painter.setRenderHint(
-        QPainter::Antialiasing);
+    painter.setRenderHint(QPainter::Antialiasing);
     QRect* rect;
 
     for(int i = 0; i < 20; i++) {
@@ -54,9 +55,9 @@ void GameWidget::paintEvent(QPaintEvent *event) {
     }
 
 
-
-
-    painter.setWindow(QRect(-50, -50, 100, 100));
+    rect = new QRect(-50, -50, 100, 100);
+    painter.setWindow(*rect);
+    painter.drawRect(*rect);
     int side = qMin(width(), height());
      int x = (width() - side / 2);
      int y = (height() - side / 2);
