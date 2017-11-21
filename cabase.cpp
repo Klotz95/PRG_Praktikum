@@ -15,6 +15,7 @@ void CAbase::setNx(int nx) {
     this->Nx = nx;
 }
 
+
 void CAbase::setNy(int ny) {
     this->Ny = ny;
 }

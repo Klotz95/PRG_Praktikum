@@ -37,26 +37,30 @@ int main()
     // menu with different options
 
 
-    bool exi = false;
-    int input;
-    bool cinfailed = true;
+
+    string input;
+    int command;
+    bool exi = true;
+
 
      do{
-
         cout << "0. Exit" << endl;
         cout << "1. Change cell" << endl;
         cout << "2. Reprint" << endl;
         cout << "$ ";
-
         cin >> input;
-        if (cin.fail() && cinfailed) {
-            cout << "Invalid input. The only allowed inputs are 0, 1 or 2." << endl;
-            cinfailed = !cinfailed;
-            continue;
-        }
+        try
+          {
+             command = stoi(input); //cause an exception to throw
+          }
 
+          catch(invalid_argument& e)
+          {
+             cout << "Please enter a number" << endl;
+             continue;
+          }
 
-        switch (input) {
+        switch (command) {
         case 1:
             int x, y, cellvalue;
             cout << "Please enter the x co-ordinate of the cell: ";
@@ -68,18 +72,17 @@ int main()
             A2->setValueAtIndex(x, y, cellvalue);
             ClearScreen();
             A2->arrayToStringMatrix();
+
         case 2:
             ClearScreen();
             A2->arrayToStringMatrix();
-            break;
         case 0:
-            exi = true;
+            exi = false;
             break;
         default:
              cout << "Invalid input. The only allowed inputs are 0, 1 or 2." << endl;
         }
-
-    }while(!exi);
+    }while(exi);
 
     ClearScreen();
     //exercise 2
@@ -96,7 +99,8 @@ int main()
 
 
     exi = false;
-    cinfailed = true;
+
+
     do{
 
        cout << "0. Exit" << endl;
@@ -107,14 +111,19 @@ int main()
        cout << "$ ";
 
        cin >> input;
-       if (cin.fail() && cinfailed) {
-           cout << "Invalid input. The only allowed inputs are 0, 1 or 2." << endl;
-           cinfailed = !cinfailed;
-           continue;
-       }
+       try
+         {
+            command = stoi(input); //cause an exception to throw
+         }
+
+         catch(invalid_argument& e)
+         {
+            cout << "Please enter a number" << endl;
+            continue;
+         }
 
        int x, y, cellvalue;
-       switch (input) {
+       switch (command) {
        case 1:
            cabase->evolve();
            ClearScreen();

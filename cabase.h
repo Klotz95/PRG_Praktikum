@@ -8,6 +8,7 @@ class CAbase
 public:
     CAbase(int nx, int ny);    // ctor
     ~CAbase();   // dtor
+
     void setNx(int Nx);
     void setNy(int Ny);
     void setActualStateOfCell(int x, int y, int alive);
