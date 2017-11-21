@@ -51,37 +51,41 @@ int main()
         cin >> input;
         try
           {
-             command = stoi(input); //cause an exception to throw
-          }
-
-          catch(invalid_argument& e)
-          {
-             cout << "Please enter a number" << endl;
-             continue;
-          }
-
-        switch (command) {
-        case 1:
+            string x_string, y_string, cv_string;
             int x, y, cellvalue;
-            cout << "Please enter the x co-ordinate of the cell: ";
-            cin >> x;
-            cout << "Please enter the y co-ordinate of the cell: ";
-            cin >> y;
-            cout << "Which value should be in the cell? ";
-            cin >> cellvalue;
-            A2->setValueAtIndex(x, y, cellvalue);
-            ClearScreen();
-            A2->arrayToStringMatrix();
-
-        case 2:
-            ClearScreen();
-            A2->arrayToStringMatrix();
-        case 0:
-            exi = false;
-            break;
-        default:
-             cout << "Invalid input. The only allowed inputs are 0, 1 or 2." << endl;
+            command = stoi(input); //cause an exception to throw
+            switch (command) {
+            case 1:
+                cout << "Please enter the x co-ordinate of the cell: ";
+                cin >> x_string;
+                x = stoi(x_string);
+                cout << "Please enter the y co-ordinate of the cell: ";
+                cin >> y_string;
+                y = stoi(y_string);
+                cout << "Which value should be in the cell? ";
+                cin >> cv_string;
+                cellvalue = stoi(cv_string);
+                A2->setValueAtIndex(x, y, cellvalue);
+                ClearScreen();
+                A2->arrayToStringMatrix();
+            case 2:
+                ClearScreen();
+                A2->arrayToStringMatrix();
+            case 0:
+                exi = false;
+                break;
+            default:
+                printf( "\n\n" );
+                cout << "Invalid input. The only allowed inputs are 0, 1 or 2. Please enter the command again." << endl;
         }
+     }
+
+    catch (invalid_argument& e) {
+        printf( "\n\n");
+        cout << "You have entered a string. Please enter only integers." << endl;
+        continue;
+     }
+
     }while(exi);
 
     ClearScreen();
@@ -96,11 +100,7 @@ int main()
 
     cabase->evolve();
     cabase->printUniverse();
-
-
-    exi = false;
-
-
+    exi = true;
     do{
 
        cout << "0. Exit" << endl;
@@ -109,60 +109,54 @@ int main()
        cout << "3. Reprint" << endl;
        cout << "4. Resize" << endl;
        cout << "$ ";
-
        cin >> input;
-       try
-         {
+       try {
             command = stoi(input); //cause an exception to throw
-         }
+            string x_string, y_string;
+            int x, y, cellvalue;
+            cellvalue = 1;
 
-         catch(invalid_argument& e)
-         {
-            cout << "Please enter a number" << endl;
-            continue;
-         }
-
-       int x, y, cellvalue;
-       switch (command) {
-       case 1:
-           cabase->evolve();
-           ClearScreen();
-           cabase->printUniverse();
-           break;
-       case 2:
-
-           cout << "Please enter the x co-ordinate of the cell: ";
-           cin >> x;
-           cout << "Please enter the y co-ordinate of the cell: ";
-           cin >> y;
-           cin >> cellvalue;
-           cabase->setActualStateOfCell(x, y, 1);
-           ClearScreen();
-           cabase->printUniverse();
-       case 3:
-           ClearScreen();
-           cabase->printUniverse();
-           break;
-       case 0:
-           exi = true;
-           break;
-       case 4:
-           cout << "Enter your universe width:";
-           cin >> x;
-           cout << "Enter your universe height:";
-           cin >> y;
-           cabase->setNx(x);
-           cabase->setNy(y);
-           cabase->printUniverse();
-           break;
-       default:
-            cout << "Invalid input. The only allowed inputs are 0, 1, 2, 3 or 4." << endl;
+            switch (command) {
+            case 1:
+                cabase->evolve();
+                ClearScreen();
+                cabase->printUniverse();
+            case 2:
+                cout << "Please enter the x co-ordinate of the cell: ";
+                cin >> x_string;
+                x = stoi(x_string);
+                cout << "Please enter the y co-ordinate of the cell: ";
+                cin >> y_string;
+                y = stoi(y_string);
+                cabase->setActualStateOfCell(x, y, cellvalue);
+                ClearScreen();
+                cabase->printUniverse();
+            case 3:
+                ClearScreen();
+                cabase->printUniverse();
+                break;
+            case 0:
+                exi = false;
+                break;
+            case 4:
+                cout << "Enter your universe width:";
+                cin >> x;
+                cout << "Enter your universe height:";
+                cin >> y;
+                cabase->setNx(x);
+                cabase->setNy(y);
+                cabase->printUniverse();
+                break;
+            default:
+                cout << "Invalid input. The only allowed inputs are 0, 1, 2, 3 or 4." << endl;
        }
-
-   }while(!exi);
-
-
-
+     }
+       catch (invalid_argument& e) {
+           printf( "\n\n");
+           cout << "You have entered a string. Please enter only integers." << endl;
+           continue;
+       }
+   }while(exi);
     return 0;
 }
 
