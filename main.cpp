@@ -140,9 +140,11 @@ int main()
                 break;
             case 4:
                 cout << "Enter your universe width:";
-                cin >> x;
+                cin >> x_string;
+                x = stoi(x_string);
                 cout << "Enter your universe height:";
-                cin >> y;
+                cin >> y_string;
+                y = stoi(y_string);
                 cabase->setNx(x);
                 cabase->setNy(y);
                 cabase->printUniverse();
@@ -157,7 +159,7 @@ int main()
            continue;
        }
    }while(exi);
-    return 0;
+        return 0;
 }
 
 
