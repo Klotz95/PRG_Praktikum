@@ -2,6 +2,15 @@
 #include <iostream>
 using namespace std;
 
+/*
+ * Author: Daniel Holzinger
+ *
+ */
+
+/**
+ * @brief IntArray::IntArray
+ * @param len
+ */
 IntArray::IntArray(int len)
 {
     this->length = len;

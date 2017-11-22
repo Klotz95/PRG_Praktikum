@@ -1,6 +1,11 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+/*
+ * Author: Daniel Holzinger
+ *
+ */
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -77,10 +82,11 @@ void MainWindow::on_spinUniverseSize_valueChanged(const QString &arg1) {
     number = number.substr(0, number.size()-deleted.size());
     this->universeSize = atoi( number.c_str() );
 
-    this->ui->gameWidget->getCAbase().setNx(universeSize);
-    this->ui->gameWidget->getCAbase().setNy(universeSize);
-    this->ui->gameWidget->setRectWidth(this->ui->gameWidget->getCAbase().getNx()/
-                                        this->ui->gameWidget->width());
-    this->ui->gameWidget->setRectHeight(this->ui->gameWidget->getCAbase().getNy()/
-                                        this->ui->gameWidget->height());
+    // somewhere is an error. dont know. mystery shit..
+    //this->ui->gameWidget->getCAbase().setNx(this->universeSize);
+//    this->ui->gameWidget->getCAbase().setNy(universeSize);
+//    this->ui->gameWidget->setRectWidth(this->ui->gameWidget->getCAbase().getNx()/
+//                                        this->ui->gameWidget->width());
+//    this->ui->gameWidget->setRectHeight(this->ui->gameWidget->getCAbase().getNy()/
+//                                        this->ui->gameWidget->height());
 }

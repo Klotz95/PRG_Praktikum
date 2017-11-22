@@ -1,6 +1,15 @@
 #include "gamewidget.h"
 #include "qpainter.h"
 
+/*
+ * Author: Daniel Holzinger
+ *
+ */
+/**
+ *
+ * @brief GameWidget::GameWidget
+ * @param parent
+ */
 GameWidget::GameWidget(QWidget* parent) {
     this->cabase = new CAbase(50, 50);
 }
