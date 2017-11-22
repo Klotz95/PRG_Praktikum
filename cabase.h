@@ -20,6 +20,14 @@ public:
     void generationCycle();
     void evolve();
     void printUniverse();
+    int east(int x, int y);
+    int west(int x, int y);
+    int north(int x, int y);
+    int south(int x, int y);
+    int northeast(int x, int y);
+    int southeast(int x, int y);
+    int northwest(int x, int y);
+    int southwest(int x, int y);
 private:
     IntArray* actualArray;
     IntArray* newArray;

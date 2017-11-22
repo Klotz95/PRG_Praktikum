@@ -65,17 +65,84 @@ void CAbase::evolutionRules(int x, int y) {
 int CAbase::countNeighbour(int x, int y) {
 
     // attention for the corners!
-    if((y != 0 && y != this->Ny) && (x != 0 && x != this->Nx)) {
-        return    this->actualArray->getIndexValue(x-1, y-1)
-                + this->actualArray->getIndexValue(x, y-1)
-                + this->actualArray->getIndexValue(x+1, y-1)
-                + this->actualArray->getIndexValue(x-1, y)
-                + this->actualArray->getIndexValue(x+1, y)
-                + this->actualArray->getIndexValue(x-1, y+1)
-                + this->actualArray->getIndexValue(x, y+1)
-                + this->actualArray->getIndexValue(x+1, y+1);
+    return this->east(x,y) + this->west(x,y) + this->north(x,y) + this->south(x,y)
+            + this->northeast(x,y) + this->northwest(x,y) + this->southeast(x,y) + this->southwest(x,y);
+
+}
+
+int CAbase::east(int x, int y) {
+    if (x == this->Nx - 1) {
+        return 0;
+    }
+    else {
+        return this->actualArray->getIndexValue(x + 1 , y);
     }
 }
+
+int CAbase::west(int x, int y) {
+    if (x == 0) {
+        return 0;
+    }
+    else {
+        return this->actualArray->getIndexValue(x - 1 , y);
+    }
+}
+
+int CAbase::north(int x, int y) {
+    if (y == 0) {
+        return 0;
+    }
+    else {
+        return this->actualArray->getIndexValue(x, y - 1);
+    }
+}
+
+int CAbase::south(int x, int y) {
+    if (y == this->Ny - 1) {
+        return 0;
+    }
+    else {
+        return this->actualArray->getIndexValue(x, y + 1);
+    }
+}
+
+int CAbase::northwest(int x, int y) {
+    if (x == 0 || y == 0) {
+        return 0;
+    }
+    else {
+        return this->actualArray->getIndexValue(x - 1, y - 1);
+    }
+}
+
+int CAbase::northeast(int x, int y) {
+    if (y == 0 || x == this->Nx - 1) {
+        return 0;
+    }
+    else {
+        return this->actualArray->getIndexValue(x + 1, y - 1);
+    }
+}
+
+int CAbase::southeast(int x, int y) {
+    if (y == this->Ny - 1 || x == this->Nx - 1) {
+        return 0;
+    }
+    else {
+        return this->actualArray->getIndexValue(x + 1, y + 1);
+    }
+}
+
+int CAbase::southwest(int x, int y) {
+    if (y == this->Ny - 1 || x == 0) {
+        return 0;
+    }
+    else {
+        return this->actualArray->getIndexValue(x - 1, y + 1);
+    }
+}
+
+
 
 void CAbase::evolve() {
     for(int index = 0; index <= (30*30); index++) {
