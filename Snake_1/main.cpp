@@ -1,11 +1,12 @@
 #include <iostream>
 #include <stdlib.h>
+#include <time.h>
 
 using namespace std;
 
 
 int main(){
-    char bordermode;
+    int bordermode;
     int eingabe;
     int dim;
     bool stopLoop = false;
@@ -13,7 +14,8 @@ int main(){
     cout << "Gib die Dimension an" << endl;
     cin >> dim;
     int A1[dim-1][dim-1];
-    int x = rand() % (dim-1); // wieso ist es immer wieder die selbe zufällige Zahl?
+    srand(time(0)); // needed to create random numbers (seed random)
+    int x = rand() % (dim-1);
     int y = rand() % (dim-1);
 
 
@@ -28,7 +30,7 @@ int main(){
             case 0: stopLoop = true; cout << "Das Programm wird beendet" << endl; break;
             case 2: A1[x][y] = 0; A1[x+1][y] = 1; x++;
                 if (x == dim){
-                    if (bordermode == 1){  // das funktioniert noch nicht ganz, bordermode wird nicht erkannt
+                    if (bordermode == 1){
                         cout << "Der Rand wurde erreicht, das Spiel wird nun beendet" << endl; stopLoop = true;}
                     else
                         x = 0;}
