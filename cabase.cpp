@@ -1,6 +1,10 @@
 #include "cabase.h"
 #include "intarray.h"
 #include <iostream>
+#include <stdlib.h>
+#include <time.h>
+
+
 
 CAbase::CAbase(int nx, int ny) {
     int arrayLength = nx * ny;
@@ -15,155 +19,146 @@ void CAbase::setNx(int nx) {
     this->Nx = nx;
 }
 
-
 void CAbase::setNy(int ny) {
     this->Ny = ny;
 }
 
-void CAbase::setActualStateOfCell(int x, int y, int alive) {
-    this->actualArray->setValueAtIndex(x, y, alive);
-}
-void CAbase::setNewStateOfCell(int x, int y, int alive) {
-    this->newArray->setValueAtIndex(x, y, alive);
-}
+
 int CAbase::getNx() {
     return this->Nx;
 }
 int CAbase::getNy() {
     return this->Ny;
 }
-int CAbase::getActualStateOfCell(int x, int y) {
-    return this->actualArray->getIndexValue(x,y);
-}
-int CAbase::getNewStateOfCell(int x, int y) {
-    return this->newArray->getIndexValue(x,y);
+
+
+
+
+
+int CAbase::getdim() {
+    return (this->getNx() * this->getNx());
 }
 
-void CAbase::generationCycle() {
-    for(int x = 0; x < this->Nx; x++) {
-        for(int y = 0; y < this->Ny; y++) {
-            evolutionRules(x, y);
-        }
+int CAbase::returnIndex(int x, int y) {
+    return (y*this->Nx + x);
+}
+
+int CAbase::getX(int index) {
+    return (index % (this->Nx));
+}
+
+int CAbase::getY(int index) {
+    return (index / (this->Nx));
+}
+
+
+void CAbase::randomfield() {
+    int value;
+    srand(time(0));
+    for(int i = 0; i< (this->Nx * this->Nx); i++) {
+        value = rand() % 6;
+        this->actualArray->setValueAtIndex(i, value);
     }
 
 }
 
-void CAbase::evolutionRules(int x, int y) {
-    int cNeighbour = countNeighbour(x, y);
-    if( cNeighbour < 2 || cNeighbour > 3) {
-        // underpopulation or overpopulation
-        // the cell die
-        this->setNewStateOfCell(x, y, 0);
-    } else if(this->actualArray->getIndexValue(x,y) == 0 && cNeighbour == 3) {
-        // reborn
-        this->setNewStateOfCell(x, y, 1);
+bool CAbase::reachedBorder(int x, int y, int indexvalue) {
+    if (y == 0 && indexvalue == 2) {
+        return true;
     }
-    // TODO: this case is not needed?
-    //else if(this->actualArray->getIndexValue(x,y) == 1 && (cNeighbour == 3 || cNeighbour == 2)) {
-}
-
-int CAbase::countNeighbour(int x, int y) {
-
-    // attention for the corners!
-    return this->east(x,y) + this->west(x,y) + this->north(x,y) + this->south(x,y)
-            + this->northeast(x,y) + this->northwest(x,y) + this->southeast(x,y) + this->southwest(x,y);
-
-}
-
-int CAbase::east(int x, int y) {
-    if (x == this->Nx - 1) {
-        return 0;
+    else if ((y == this->Nx - 1) && indexvalue == 4) {
+        return true;
+    }
+    else if ((x == 0) && indexvalue == 5) {
+        return true;
+    }
+    else if ((x == this->Nx - 1) && indexvalue == 3) {
+        return true;
     }
     else {
-        return this->actualArray->getIndexValue(x + 1 , y);
+        return false;
     }
-}
 
-int CAbase::west(int x, int y) {
-    if (x == 0) {
-        return 0;
-    }
-    else {
-        return this->actualArray->getIndexValue(x - 1 , y);
-    }
-}
-
-int CAbase::north(int x, int y) {
-    if (y == 0) {
-        return 0;
-    }
-    else {
-        return this->actualArray->getIndexValue(x, y - 1);
-    }
-}
-
-int CAbase::south(int x, int y) {
-    if (y == this->Ny - 1) {
-        return 0;
-    }
-    else {
-        return this->actualArray->getIndexValue(x, y + 1);
-    }
-}
-
-int CAbase::northwest(int x, int y) {
-    if (x == 0 || y == 0) {
-        return 0;
-    }
-    else {
-        return this->actualArray->getIndexValue(x - 1, y - 1);
-    }
-}
-
-int CAbase::northeast(int x, int y) {
-    if (y == 0 || x == this->Nx - 1) {
-        return 0;
-    }
-    else {
-        return this->actualArray->getIndexValue(x + 1, y - 1);
-    }
-}
-
-int CAbase::southeast(int x, int y) {
-    if (y == this->Ny - 1 || x == this->Nx - 1) {
-        return 0;
-    }
-    else {
-        return this->actualArray->getIndexValue(x + 1, y + 1);
-    }
-}
-
-int CAbase::southwest(int x, int y) {
-    if (y == this->Ny - 1 || x == 0) {
-        return 0;
-    }
-    else {
-        return this->actualArray->getIndexValue(x - 1, y + 1);
-    }
 }
 
 
+void CAbase::evolve(int mode) {
+     int dim = this->Nx;
+     int x, y, indexvalue;
+     bool gameEnd;
+     //while(true) {
+         for(int index = 0; index < (this->getdim()); index++) {
+             indexvalue = this->actualArray->getIndexValue(index);
+             y = index / dim;
+             x = index % dim;
 
-void CAbase::evolve() {
-    for(int index = 0; index <= (30*30); index++) {
-        this->actualArray->setValueAtIndex(index, rand() % 2);
-    }
+            int index_new;
+
+            if (this->reachedBorder(x, y, indexvalue) && mode == 1) {
+                cout << "You have reached the border" << endl;
+                gameEnd = true;
+                break;
+             switch (indexvalue) {
+
+
+                case 2: //2 is up
+                    if (y == 0) {
+                      index_new = this->returnIndex(x, dim - 1);
+                      }
+                    else {
+                      index_new = this->returnIndex(x, y - 1);
+                    }
+                    this->newArray->setValueAtIndex(index_new, 2);
+                case 4: //4 is down
+                    if (y == dim - 1) {
+                         index_new = this->returnIndex(x, 0);
+                    }
+                    else {
+                    index_new = this->returnIndex(x, y + 1);
+                    }
+                    this->newArray->setValueAtIndex(index_new, 4);
+
+                case 3: //3 is right
+                    if (x == dim - 1) {
+                        index_new = this->returnIndex(0, y);
+                    }
+                     else {
+                         index_new = this->returnIndex(x+1, y);
+                    }
+                    this->newArray->setValueAtIndex(index_new, 3);
+
+
+                case 5: //5 is left
+                    if (x == 0){
+                        index_new = this->returnIndex(dim - 1, y);
+                    }
+                    else {
+                        index_new = this->returnIndex(x-1, y);
+                    }
+                    this->newArray->setValueAtIndex(index_new, 5);
+            }
+
+             }
+
+
+
+     }
 }
+
+   //}
+
 
 void CAbase::printUniverse(){
-    for(int i = 0; i <= (this->Nx*2)+2; i++) {
-        cout << "#";
-    }
-    cout << endl;
+
     for(int i = 0; i <= (this->Nx*this->Ny -1); i++) {
 
         if(((i)%this->Ny) == 0) {
             cout << "# ";
         }
 
-        if(this->actualArray->getIndexValue(i) == 1) {
-            cout << "*" << " ";
-        } else {
+        if(this->actualArray->getIndexValue(i) > 0) {
+            cout << this->actualArray->getIndexValue(i) << " ";
+        } else if (this->actualArray->getIndexValue(i)  == 0) {
             cout << " " << " ";
         }
         if(((i+1)%this->Nx)==0 && i > 0) {
@@ -174,4 +169,41 @@ void CAbase::printUniverse(){
         cout << "#";
     }
     cout << endl;
+
+    for(int i = 0; i <= (this->Nx*2)+2; i++) {
+        cout << "#";
+    }
+    cout << endl;
+
+
+    for(int i = 0; i <= (this->Nx*this->Ny -1); i++) {
+
+        if(((i)%this->Ny) == 0) {
+            cout << "# ";
+        }
+
+        if(this->newArray->getIndexValue(i) > 0) {
+            cout << this->newArray->getIndexValue(i) << " ";
+        } else if (this->newArray->getIndexValue(i)  == 0) {
+            cout << " " << " ";
+        }
+        if(((i+1)%this->Nx)==0 && i > 0) {
+            cout << "#" << endl;
+        }
+    }
+    for(int i = 0; i <= (this->Nx*2)+2; i++) {
+        cout << "#";
+    }
+    cout << endl;
+
+    for(int i = 0; i <= (this->Nx*2)+2; i++) {
+        cout << "#";
+    }
+    cout << endl;
+
+
+
+
+
+
 }

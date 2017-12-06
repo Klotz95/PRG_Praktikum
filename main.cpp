@@ -1,6 +1,9 @@
 #include <intarray.h>
 #include <iostream>
 #include <cabase.h>
+#include <stdlib.h>
+#include <time.h>
+
 
 using namespace std;
 class IntArray;
@@ -12,154 +15,102 @@ void ClearScreen(){
 
 }
 
+int main(){
+    /*
+    char bordermode;
+    int eingabe;
+    int dim;
+    bool stopLoop = false;
+*/
 
-int main()
-{
-    int A1[30][30];
-    IntArray *A2 = new IntArray(30*30);
 
-    // fill A1 with random values between 0 and 10
-    for(int i = 0; i <= 29; i++) {
-        for(int j = 0; j < 30; j++) {
-            A1[i][j] = rand() % 10;
+
+    int dim, mode;
+
+    cout << "Please enter the dimesion of the board." << endl;
+    cin >> dim;
+    cout << "Please enter the game mode. 0 - torus mode, 1 - border mode ";
+    cin >> mode;
+    CAbase* field= new CAbase(dim, dim);
+
+    field->randomfield();
+
+    field->evolve(mode);
+    field->printUniverse();
+
+
+
+/*
+        int befehl = 0;
+        while (befehl == 0) {
+            cin >> befehl;
+
+            field->evolve();
+            field->printUniverse();
         }
-    }
+*/
+        /*
+        while (befehl == 0) {
+            cin >> befehl;
+            //field->evolve();
 
-    // copy elements from A1 to A2
-    for(int index = 0; index <= (30*30); index++) {
-        A2->setValueAtIndex(index, A1[index/30][index%30]);
-    }
-
-    A2->arrayToStringMatrix();
-
-    cout << "Welcome to console menu" << endl;
-    cout << "Enter the following numbers to run the respective commands." <<endl;
-    // menu with different options
-
-
-
-    string input;
-    int command;
-    bool exi = true;
-
-
-     do{
-        cout << "0. Exit" << endl;
-        cout << "1. Change cell" << endl;
-        cout << "2. Reprint" << endl;
-        cout << "$ ";
-        cin >> input;
-        try
-          {
-            string x_string, y_string, cv_string;
-            int x, y, cellvalue;
-            command = stoi(input); //cause an exception to throw
-            switch (command) {
-            case 1:
-                cout << "Please enter the x co-ordinate of the cell: ";
-                cin >> x_string;
-                x = stoi(x_string);
-                cout << "Please enter the y co-ordinate of the cell: ";
-                cin >> y_string;
-                y = stoi(y_string);
-                cout << "Which value should be in the cell? ";
-                cin >> cv_string;
-                cellvalue = stoi(cv_string);
-                A2->setValueAtIndex(x, y, cellvalue);
-                ClearScreen();
-                A2->arrayToStringMatrix();
-            case 2:
-                ClearScreen();
-                A2->arrayToStringMatrix();
-            case 0:
-                exi = false;
-                break;
-            default:
-                printf( "\n\n" );
-                cout << "Invalid input. The only allowed inputs are 0, 1 or 2. Please enter the command again." << endl;
-        }
-     }
-
-    catch (invalid_argument& e) {
-        printf( "\n\n");
-        cout << "You have entered a string. Please enter only integers." << endl;
-        continue;
-     }
-
-    }while(exi);
-
-    ClearScreen();
-    //exercise 2
-
-    cout << "#################################################################" << endl;
-    cout << "#                          exercise 2                           #" << endl;
-    cout << "#################################################################" << endl;
-
-    CAbase* cabase = new CAbase(30, 30);
-
-
-    cabase->evolve();
-    cabase->printUniverse();
-    exi = true;
-    do{
-
-       cout << "0. Exit" << endl;
-       cout << "1. Evolve" << endl;
-       cout << "2. Set alive cell" << endl;
-       cout << "3. Reprint" << endl;
-       cout << "4. Resize" << endl;
-       cout << "$ ";
-       cin >> input;
-       try {
-            command = stoi(input); //cause an exception to throw
-            string x_string, y_string;
-            int x, y, cellvalue;
-            cellvalue = 1;
-
-            switch (command) {
-            case 1:
-                cabase->evolve();
-                ClearScreen();
-                cabase->printUniverse();
-            case 2:
-                cout << "Please enter the x co-ordinate of the cell: ";
-                cin >> x_string;
-                x = stoi(x_string);
-                cout << "Please enter the y co-ordinate of the cell: ";
-                cin >> y_string;
-                y = stoi(y_string);
-                cabase->setActualStateOfCell(x, y, cellvalue);
-                ClearScreen();
-                cabase->printUniverse();
-            case 3:
-                ClearScreen();
-                cabase->printUniverse();
-                break;
-            case 0:
-                exi = false;
-                break;
-            case 4:
-                cout << "Enter your universe width:";
-                cin >> x_string;
-                x = stoi(x_string);
-                cout << "Enter your universe height:";
-                cin >> y_string;
-                y = stoi(y_string);
-                cabase->setNx(x);
-                cabase->setNy(y);
-                cabase->printUniverse();
-                break;
-            default:
-                cout << "Invalid input. The only allowed inputs are 0, 1, 2, 3 or 4." << endl;
-       }
-     }
-       catch (invalid_argument& e) {
-           printf( "\n\n");
-           cout << "You have entered a string. Please enter only integers." << endl;
-           continue;
-       }
-   }while(exi);
-        return 0;
+            //field->printUniverse();
 }
+*/
+/*
+
+    cout << "Bitte gib den Raendermodus an! 0 = Torus, 1 = mit Rand" << endl;
+    cin >> bordermode;
+    cout << "x = " << x << " und y = " << y << endl;
+    A1[x][y] = 1;
+    do{
+        cout << "Gib die Richtung an!";
+        cin >> eingabe;
+        switch(eingabe){
+            case 0: stopLoop = true; cout << "Das Programm wird beendet" << endl; break;
+            case 2: A1[x][y] = 0; A1[x][y+1] = 1; x++;
+                if (x == dim){
+                    if (bordermode == 1){  // das funktioniert noch nicht ganz, bordermode wird nicht erkannt
+                        cout << "Der Rand wurde erreicht, das Spiel wird nun beendet" << endl; stopLoop = true;}
+                    else
+                        x = 0;}
+                cout << "x = " << x << ", y = " << y << endl; // Platzhalter, hier kommt noch die komplette Matrix hin
+                break;
+
+            case 4: A1[x][y] = 0; A1[x-1][y] = 1; y--;
+                if (y == -1){
+                    if (bordermode == 1){
+                        cout << "Der Rand wurde erreicht, das Spiel wird nun beendet" << endl; stopLoop = true;}
+                    else
+                        y = dim-1;}
+                cout << "x = " << x << ", y = " << y << endl;
+                break;
+
+            case 6: A1[x][y] = 0; A1[x][y+1] = 1; y++;
+                if (y == dim){
+                    if (bordermode == 1){
+                        cout << "Der Rand wurde erreicht, das Spiel wird nun beendet" << endl; stopLoop = true;}
+                    else
+                        y = 0;}
+                cout << "x = " << x << ", y = " << y << endl;
+                break;
+
+            case 8: A1[x][y] = 0; A1[x-1][y] = 1; x--;
+                if (x == -1){
+                    if (bordermode == 1){
+                        cout << "Der Rand wurde erreicht, das Spiel wird nun beendet" << endl; stopLoop = true;}
+                    else
+                        x = dim-1;}
+                cout << "x = " << x << ", y = " << y << endl;
+                break;
+
+            default: cout << "Bitte eine Richtung (2,4,6 oder 8) angeben!" << endl; break;
+        }
+    } while(stopLoop == false);
+
+    */
+}
+
+
 
 

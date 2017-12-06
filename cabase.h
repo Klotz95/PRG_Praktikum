@@ -11,14 +11,14 @@ public:
 
     void setNx(int Nx);
     void setNy(int Ny);
-    void setActualStateOfCell(int x, int y, int alive);
-    void setNewStateOfCell(int x, int y, int alive);
+
+
     int getNx();
     int getNy();
-    int getActualStateOfCell(int x, int y);
-    int getNewStateOfCell(int x, int y);
+
+
     void generationCycle();
-    void evolve();
+    void evolve(int mode);
     void printUniverse();
     int east(int x, int y);
     int west(int x, int y);
@@ -28,6 +28,12 @@ public:
     int southeast(int x, int y);
     int northwest(int x, int y);
     int southwest(int x, int y);
+    int getdim();
+    void randomfield();
+    int getX(int index);
+    int getY(int index);
+    int returnIndex(int x, int y);
+    bool reachedBorder(int x, int y, int indexvalue);
 private:
     IntArray* actualArray;
     IntArray* newArray;
