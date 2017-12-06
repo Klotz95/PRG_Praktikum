@@ -93,14 +93,27 @@ void CAbase::evolve(int mode) {
              x = index % dim;
 
             int index_new;
-
+            //The positioning of the indexvalues in the new array stops if the game is in border mode
+            //and the cell moves into the border.
             if (this->reachedBorder(x, y, indexvalue) && mode == 1) {
                 cout << "You have reached the border" << endl;
                 gameEnd = true;
                 break;
+            }
              switch (indexvalue) {
+                case 0:
+                 if (this->newArray->getIndexValue(index) == NULL) {
+                 //To not let the index value be overwritten by 0.
+                    this->newArray->setValueAtIndex(index, 0);
 
+                 }
+                 case 1:
+                    if (this->newArray->getIndexValue(index) == NULL) {
+                    //To not let the index value be overwritten by 1.
+                       this->newArray->setValueAtIndex(index, 1);
+                   }
 
+                //if Cases are written to consider the border of the field.
                 case 2: //2 is up
                     if (y == 0) {
                       index_new = this->returnIndex(x, dim - 1);
@@ -143,7 +156,7 @@ void CAbase::evolve(int mode) {
 
 
      }
-}
+
 
    //}
 
