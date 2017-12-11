@@ -13,7 +13,7 @@ double IntArray::getLength( void ) {
 }
 
 int IntArray::getIndexValue(int index) {
-    return array[index];
+    return this->array[index];
 }
 
 void IntArray::setValueAtIndex(int index, int value){

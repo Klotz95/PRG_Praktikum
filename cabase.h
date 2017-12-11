@@ -18,7 +18,7 @@ public:
 
 
     void generationCycle();
-    void evolve(int mode);
+    void evolve(int mode, int direction);
     void printUniverse();
     int east(int x, int y);
     int west(int x, int y);
@@ -33,12 +33,18 @@ public:
     int getX(int index);
     int getY(int index);
     int returnIndex(int x, int y);
-    bool reachedBorder(int x, int y, int indexvalue);
+    bool reachedBorder(int index);
+    void printSnakeUniverse();
+    void emptyAndPutHead(int index);
+    void setHeadIndex(int index);
+    int getHeadIndex();
+    void moveHead(int direction, int mode);
 private:
     IntArray* actualArray;
     IntArray* newArray;
     int Nx;
     int Ny;
+    int HeadIndex;
     int countNeighbour(int x, int y);
     void evolutionRules(int x, int y);
 };
