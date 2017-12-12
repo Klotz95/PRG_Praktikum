@@ -4,7 +4,6 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += \
-    helloworld.cpp \
     intarray.cpp \
     main.cpp \
     cabase.cpp

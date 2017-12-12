@@ -87,9 +87,6 @@ void CAbase::emptyAndPutHead(int index) {
 
 
 void CAbase::moveHead(int direction, int mode) {
-
-    cout << "head index" << endl;
-    cout << getHeadIndex() << endl;
     int i, x, y; //i is index of head, x and y are co-ordinates
     int dim = this->Nx;
 
@@ -125,7 +122,7 @@ void CAbase::moveHead(int direction, int mode) {
                   gameEnded = true;
                   }
                 else {
-                     y = dim - 1;
+                     x = 0;
                  }
              }
                else {
